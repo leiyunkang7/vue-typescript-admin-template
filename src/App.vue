@@ -9,6 +9,7 @@
       </p>
       <el-button>el-button</el-button>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 

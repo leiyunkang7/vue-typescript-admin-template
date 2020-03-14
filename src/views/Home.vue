@@ -1,14 +1,26 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    {{ state }}
+
+    <el-button @click="refetch">refetch</el-button>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
+<script lang="ts">
+import { defineComponent } from '@vue/composition-api'
+import useAxios from '@/composables/use-axios'
 
-export default {
-  name: 'Home',
-  components: {}
-}
+export default defineComponent({
+  setup() {
+    const { state, refetch } = useAxios(
+      {
+        url: 'http://localhost:8080/',
+        method: 'get'
+      },
+      { manual: true }
+    )
+
+    return { state, refetch }
+  }
+})
 </script>
