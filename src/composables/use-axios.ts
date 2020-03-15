@@ -1,7 +1,8 @@
 import StaticAxios, {
   AxiosStatic,
   AxiosPromise,
-  AxiosRequestConfig
+  AxiosRequestConfig,
+  AxiosInstance
 } from 'axios'
 import LRU from 'lru-cache'
 import { ref, watch, onUnmounted, computed } from '@vue/composition-api'
@@ -11,11 +12,25 @@ const actions = {
   REQUEST_END: 'REQUEST_END'
 }
 
-export function makeUseAxios(configurationOptions?: any) {
-  let cache: any
+export interface Options {
+  manual?: boolean
+  useCache?: boolean
+}
+
+export interface RefetchOptions {
+  useCache?: boolean
+}
+
+export interface ConfigureOptions {
+  axios?: AxiosInstance | AxiosStatic | any
+  cache?: LRU<any, any>
+}
+
+export function makeUseAxios(configurationOptions?: ConfigureOptions) {
+  let cache: LRU<any, any>
   let axiosInstance: AxiosStatic
 
-  const __ssrPromises: AxiosPromise<any>[] = []
+  const __ssrPromises: Promise<any>[] = []
 
   function resetConfigure() {
     cache = new LRU()
@@ -24,7 +39,7 @@ export function makeUseAxios(configurationOptions?: any) {
 
   resetConfigure()
 
-  function configure(options: any = {}) {
+  function configure(options: ConfigureOptions = {}) {
     if (options.axios) {
       axiosInstance = options.axios
     }
@@ -36,7 +51,7 @@ export function makeUseAxios(configurationOptions?: any) {
 
   configure(configurationOptions)
 
-  function loadCache(data: any) {
+  function loadCache(data: any[]) {
     cache.load(data)
   }
 
@@ -71,7 +86,7 @@ export function makeUseAxios(configurationOptions?: any) {
     return response
   }
 
-  function createInitialState(options: any) {
+  function createInitialState(options: Options) {
     return {
       loading: !options.manual
     }
@@ -129,7 +144,7 @@ export function makeUseAxios(configurationOptions?: any) {
 
   function executeRequest(
     config: AxiosRequestConfig,
-    options: any,
+    options: Options,
     dispatch: Function
   ) {
     if (options.useCache) {
@@ -139,7 +154,10 @@ export function makeUseAxios(configurationOptions?: any) {
     return executeRequestWithoutCache(config, dispatch)
   }
 
-  function useAxios(config: AxiosRequestConfig, options: any) {
+  function useAxios(
+    config: AxiosRequestConfig | string,
+    options: Options = { manual: false, useCache: false }
+  ) {
     if (typeof config === 'string') {
       config = {
         url: config
@@ -176,7 +194,10 @@ export function makeUseAxios(configurationOptions?: any) {
 
       if (!options.manual) {
         executeRequest(
-          { cancelToken: cancelSourceRef.value.token, ...config },
+          {
+            cancelToken: cancelSourceRef.value.token,
+            ...(config as AxiosRequestConfig)
+          },
           options,
           dispatch
         ).catch(() => {})
@@ -187,11 +208,14 @@ export function makeUseAxios(configurationOptions?: any) {
       cancelSourceRef.value.cancel()
     })
 
-    const refetch = (configOverride: AxiosRequestConfig, options: any) => {
+    const refetch = (
+      configOverride: AxiosRequestConfig,
+      options: RefetchOptions
+    ) => {
       return executeRequest(
         {
           cancelToken: cancelSourceRef.value.token,
-          ...config,
+          ...(config as AxiosRequestConfig),
           ...configOverride
         },
         { useCache: false, ...options },
