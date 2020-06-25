@@ -25,7 +25,7 @@ export default function useValidation(modelRef: Ref<any>, rules: any) {
       }
       validateAll()
     },
-    { deep: true, lazy: true }
+    { deep: true, immediate: true }
   )
 
   return { valid, errors, dirty }

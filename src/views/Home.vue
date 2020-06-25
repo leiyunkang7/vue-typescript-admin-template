@@ -74,7 +74,7 @@ export default defineComponent({
 
     const selection = ref<User[]>([])
 
-    const tableRef = ref<Table>(null)
+    const tableRef = ref<Table | null>(null)
 
     function addItem(list: User[]) {
       selectedData.value = unionBy([...selectedData.value, ...list], 'id')

@@ -53,7 +53,7 @@ export default function usePagination(options: Page = defaultPage) {
         _currentPage.value = lastPage.value
       }
     },
-    { lazy: true } // no need to run on first render
+    { immediate: true } // no need to run on first render
   )
 
   return {
