@@ -4,11 +4,19 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'app',
-  components: {}
-}
+<script lang="ts">
+import { defineComponent, onMounted } from '@vue/composition-api'
+
+export default defineComponent({
+  name: 'App',
+  components: {},
+
+  setup(props, context) {
+    onMounted(() => {
+      context.root.$i18n.locale = 'zh'
+    })
+  }
+})
 </script>
 
 <style>

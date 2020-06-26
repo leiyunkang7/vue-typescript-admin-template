@@ -15,13 +15,18 @@
           </div>
 
           <div>
-            这是一段内容,这是一段内容,这是一段内容,这是一段内容。
+            {{ arg.timeText }}
           </div>
         </el-popover>
       </template>
 
-      <template v-slot:dayHeaderContent="{ dow }">
-        {{ $t(`weekName${dow}`) }}
+      <template v-slot:dayHeaderContent="args">
+        {{ $t(`weekName${args.dow}`) }}
+        <div>{{ args.text }}</div>
+      </template>
+
+      <template v-slot:moreLinkContent="args">
+        {{ args }}
       </template>
     </FullCalendar>
   </div>
@@ -36,22 +41,22 @@
     "weekName4": "星期四",
     "weekName5": "星期五",
     "weekName6": "星期六",
-    "weekName7": "星期日"
+    "weekName0": "星期日"
   },
   "en": {
-    "weekName1": "星期一",
-    "weekName2": "星期二",
-    "weekName3": "星期三",
-    "weekName4": "星期四",
-    "weekName5": "星期五",
-    "weekName6": "星期六",
-    "weekName7": "星期日"
+    "weekName1": "Mon",
+    "weekName2": "Tue",
+    "weekName3": "Wed",
+    "weekName4": "Thu",
+    "weekName5": "Fri",
+    "weekName6": "Sat",
+    "weekName0": "Sun"
   }
 }
 </i18n>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from '@vue/composition-api'
+import { defineComponent, ref, onMounted, watch } from '@vue/composition-api'
 import FullCalendar from '@fullcalendar/vue'
 import useCalendarOptions from './use-calendar-options'
 import { Popover } from 'element-ui'
@@ -71,7 +76,21 @@ export default defineComponent({
 
     const fullCalendar = ref<any>(null)
 
+    const win: any = window
+
+    win.fullCalendar = fullCalendar
+
     const { date: week } = useWeeks()
+
+    onMounted(() => {
+      watch(
+        week,
+        week => {
+          fullCalendar.value?.getApi().gotoDate(week)
+        },
+        { immediate: true }
+      )
+    })
 
     return { calendarOptions, fullCalendar, week }
   }

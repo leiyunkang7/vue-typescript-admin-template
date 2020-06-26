@@ -20,11 +20,147 @@ export default function useCalendarOptions() {
     ],
     headerToolbar: {
       left: '',
-      center: '',
+      center: 'timeGrid,timeGridWeek',
       right: ''
     },
+    firstDay: 1,
     initialView: 'timeGridWeek',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+
+    events: [
+      {
+        title: 'Event',
+        start: '2018-04-07'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      },
+      {
+        title: 'Event',
+        start: '2018-04-07T07:00:00'
+      }
+    ],
     allDaySlot: false,
     slotEventOverlap: false,
     slotDuration: '00:10:00',
@@ -39,15 +175,14 @@ export default function useCalendarOptions() {
     editable: true,
     selectable: true,
     selectMirror: true,
-    dayMaxEvents: true,
     weekends: true,
-    columnHeaderHtml(date: Date) {
-      if (date.getUTCDay() === 5) {
-        return '<b>Friday!</b>'
-      } else {
-        return '<i>other day</i>'
+    dayMaxEventRows: true, // for all non-TimeGrid views
+    views: {
+      timeGrid: {
+        dayMaxEventRows: 3 // adjust to 6 only for timeGridWeek/timeGridDay
       }
     },
+
     select: handleDateSelect,
     eventClick: handleEventClick,
     eventsSet: handleEvents

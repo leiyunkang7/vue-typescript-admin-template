@@ -6,6 +6,7 @@
       type="week"
       format="yyyy 第 WW 周"
       placeholder="选择周"
+      :picker-options="{ firstDayOfWeek: 1 }"
     >
     </el-date-picker>
     <el-button @click="nextWeek">下一周</el-button>
