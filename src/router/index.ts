@@ -23,6 +23,11 @@ const routes = [
     path: '/calendar-demo',
     name: 'CalendarDemo',
     component: () => import('../views/calendar-demo')
+  },
+  {
+    path: '/full-calendar-demo',
+    name: 'FullCalendarDemo',
+    component: () => import('../views/full-calendar-demo')
   }
 ]
 

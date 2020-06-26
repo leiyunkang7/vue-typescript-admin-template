@@ -20,6 +20,9 @@
       :schedules="scheduleList"
       :usageStatistics="false"
       :theme="myTheme"
+      :useCreationPopup="false"
+      :useDetailPopup="false"
+      @clickSchedule="onClickSchedule"
       @beforeCreateSchedule="onBeforeCreateSchedule"
       @beforeDeleteSchedule="onBeforeDeleteSchedule"
     >
@@ -49,7 +52,7 @@ export default defineComponent({
       weekDayname(a: any) {
         return `<div>${a.dayName}\r(18)</div>`
       },
-      milestone: function(schedule: any) {
+      milestone(schedule: any) {
         return (
           '<span class="calendar-font-icon ic-milestone-b"></span> <span style="background-color: ' +
           schedule.bgColor +
@@ -57,6 +60,12 @@ export default defineComponent({
           schedule.title +
           '</span>'
         )
+      },
+      time(e: any) {
+        return `<div>${e.title}</div>`
+      },
+      popupDetailBody(e: any) {
+        return `<div>你吃饭了吗</div>`
       }
     })
 
@@ -68,7 +77,8 @@ export default defineComponent({
         category: 'time',
         dueDateClass: '',
         start: '2020-06-25T03:30:00+08:00',
-        end: '2020-06-25T05:30:00+08:00'
+        end: '2020-06-25T05:30:00+08:00',
+        content: '填充内容'
       },
       {
         id: '2',
@@ -77,7 +87,8 @@ export default defineComponent({
         category: 'time',
         dueDateClass: '',
         start: '2020-06-25T04:30:00+08:00',
-        end: '2020-06-25T06:31:00+08:00'
+        end: '2020-06-25T06:31:00+08:00',
+        content: '填充内容'
       }
     ])
 
@@ -85,6 +96,14 @@ export default defineComponent({
       template,
       scheduleList,
       myTheme,
+      onClickSchedule(e: any) {
+        console.table(e)
+        const willModify = confirm(
+          `title: ${e.schedule.title}\n when: ${new Date(
+            e.schedule.start
+          )} \nWill you update schedule?`
+        )
+      },
       onBeforeCreateSchedule(e: any) {
         scheduleList.value.push({
           id: uniqueId(),
@@ -93,7 +112,8 @@ export default defineComponent({
           category: 'time',
           dueDateClass: '',
           start: e.start,
-          end: e.end
+          end: e.end,
+          content: '填充内容'
         })
       },
       onBeforeDeleteSchedule(res: any) {

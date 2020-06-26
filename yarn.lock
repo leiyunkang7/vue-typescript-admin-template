@@ -796,6 +796,55 @@
     debug "^3.1.0"
     lodash.once "^4.1.1"
 
+"@fullcalendar/common@~5.0.0":
+  version "5.0.1"
+  resolved "https://registry.npm.taobao.org/@fullcalendar/common/download/@fullcalendar/common-5.0.1.tgz#0f685cbf7224d41d1f1c362855634e42b2ce4995"
+  integrity sha1-D2hcv3Ik1B0fHDYoVWNOQrLOSZU=
+  dependencies:
+    tslib "^2.0.0"
+
+"@fullcalendar/core@~5.0.0":
+  version "5.0.0"
+  resolved "https://registry.npm.taobao.org/@fullcalendar/core/download/@fullcalendar/core-5.0.0.tgz#007ce602bc52adc0d867aed839850de39fff5f3b"
+  integrity sha1-AHzmArxSrcDYZ67YOYUN45//Xzs=
+  dependencies:
+    "@fullcalendar/common" "~5.0.0"
+    preact "^10.0.5"
+    tslib "^2.0.0"
+
+"@fullcalendar/daygrid@^5.0.1", "@fullcalendar/daygrid@~5.0.0":
+  version "5.0.1"
+  resolved "https://registry.npm.taobao.org/@fullcalendar/daygrid/download/@fullcalendar/daygrid-5.0.1.tgz#dfa39737f9d9f7b9c247020a17e099e4a9c17a26"
+  integrity sha1-36OXN/nZ97nCRwIKF+CZ5KnBeiY=
+  dependencies:
+    "@fullcalendar/common" "~5.0.0"
+    tslib "^2.0.0"
+
+"@fullcalendar/interaction@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.npm.taobao.org/@fullcalendar/interaction/download/@fullcalendar/interaction-5.0.0.tgz#730e7df7b6edeb62988b0a67f889258374e9875d"
+  integrity sha1-cw5997bt62KYiwpn+Iklg3Tph10=
+  dependencies:
+    "@fullcalendar/common" "~5.0.0"
+    tslib "^2.0.0"
+
+"@fullcalendar/timegrid@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.npm.taobao.org/@fullcalendar/timegrid/download/@fullcalendar/timegrid-5.0.1.tgz#0299b4549e779eafc7811a2608843c06fb4b562c"
+  integrity sha1-Apm0VJ53nq/HgRomCIQ8BvtLViw=
+  dependencies:
+    "@fullcalendar/common" "~5.0.0"
+    "@fullcalendar/daygrid" "~5.0.0"
+    tslib "^2.0.0"
+
+"@fullcalendar/vue@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.npm.taobao.org/@fullcalendar/vue/download/@fullcalendar/vue-5.0.0.tgz#09735426373713f5dba078523d5535721a5c472f"
+  integrity sha1-CXNUJjc3E/XboHhSPVU1chpcRy8=
+  dependencies:
+    "@fullcalendar/core" "~5.0.0"
+    tslib "^2.0.0"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.npm.taobao.org/@hapi/address/download/@hapi/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -1282,6 +1331,13 @@
     lodash "^4.17.15"
     semver "^6.3.0"
     tsutils "^3.17.1"
+
+"@u3u/vue-hooks@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/@u3u/vue-hooks/download/@u3u/vue-hooks-2.0.1.tgz#d7e3d22a08bd612ca08f78f9b0def0ad54e3d667"
+  integrity sha1-1+PSKgi9YSygj3j5sN7wrVTj1mc=
+  dependencies:
+    dayjs "^1.8.15"
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.0.0":
   version "1.0.0"
@@ -3682,6 +3738,11 @@ date-fns@^1.27.2:
   version "1.30.1"
   resolved "https://registry.npm.taobao.org/date-fns/download/date-fns-1.30.1.tgz?cache=0&sync_timestamp=1582629905722&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdate-fns%2Fdownload%2Fdate-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
   integrity sha1-LnG/CxGRU9u0zE6I2epaz7UNwFw=
+
+dayjs@^1.8.15:
+  version "1.8.28"
+  resolved "https://registry.npm.taobao.org/dayjs/download/dayjs-1.8.28.tgz#37aa6201df483d089645cb6c8f6cef6f0c4dbc07"
+  integrity sha1-N6piAd9IPQiWRctsj2zvbwxNvAc=
 
 de-indent@^1.0.2:
   version "1.0.2"
@@ -8740,6 +8801,11 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.16, postcss@^7.0.2
     chalk "^2.4.2"
     source-map "^0.6.1"
     supports-color "^6.1.0"
+
+preact@^10.0.5:
+  version "10.4.4"
+  resolved "https://registry.npm.taobao.org/preact/download/preact-10.4.4.tgz#0bd6d759ec2f8684aaf8c63c7f076191e46528cf"
+  integrity sha1-C9bXWewvhoSq+MY8fwdhkeRlKM8=
 
 prelude-ls@~1.1.2:
   version "1.1.2"
