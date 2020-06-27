@@ -2,7 +2,7 @@
   <div class="full-calendar-demo">
     <week-select v-model="week"></week-select>
     <FullCalendar
-      ref="fullCalendar"
+      ref="calendarRef"
       class="app-calendar"
       :options="calendarOptions"
     >
@@ -21,8 +21,10 @@
       </template>
 
       <template v-slot:dayHeaderContent="args">
-        {{ $t(`weekName${args.dow}`) }}
-        <div>{{ args.text }}</div>
+        <div class="header-content" @click="handleHeaderClick(args)">
+          {{ $t(`weekName${args.dow}`) }}
+          <div>{{ args.text }}</div>
+        </div>
       </template>
 
       <template v-slot:moreLinkContent="args">
@@ -56,11 +58,12 @@
 </i18n>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, watch } from '@vue/composition-api'
+import { defineComponent } from '@vue/composition-api'
 import FullCalendar from '@fullcalendar/vue'
 import useCalendarOptions from './use-calendar-options'
 import { Popover } from 'element-ui'
 import WeekSelect, { useWeeks } from '@/components/form/week-select'
+import useCalendarRef from './use-calendar-ref'
 
 export default defineComponent({
   name: 'FullCalendarDemo',
@@ -71,28 +74,21 @@ export default defineComponent({
     'el-popover': Popover
   },
 
-  setup() {
+  setup(props, context) {
     const { calendarOptions } = useCalendarOptions()
-
-    const fullCalendar = ref<any>(null)
-
-    const win: any = window
-
-    win.fullCalendar = fullCalendar
 
     const { date: week } = useWeeks()
 
-    onMounted(() => {
-      watch(
-        week,
-        week => {
-          fullCalendar.value?.getApi().gotoDate(week)
-        },
-        { immediate: true }
-      )
-    })
+    const { calendarRef } = useCalendarRef({ week, context })
 
-    return { calendarOptions, fullCalendar, week }
+    return {
+      calendarOptions,
+      calendarRef,
+      week,
+      handleHeaderClick(args: any) {
+        console.table('头部单击事件', args)
+      }
+    }
   }
 })
 </script>
