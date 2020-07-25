@@ -28,6 +28,11 @@ const routes = [
     path: '/full-calendar-demo',
     name: 'FullCalendarDemo',
     component: () => import('../views/full-calendar-demo')
+  },
+  {
+    path: '/promise-dialog',
+    name: 'PromiseDialog',
+    component: () => import('../views/promise-dialog')
   }
 ]
 
